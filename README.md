@@ -12,7 +12,7 @@ This repository demonstrates how to bridge LLMs with deterministic Python functi
 | Mini-Project | Key Capabilities | Interactive Notebook |
 | **1. Single Tool Execution** | Automatic Function Calling, single-tool docstring parsing, type extraction. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DuhranDuhran/AI-tool-calling/blob/main/Single_Tool_Execution.ipynb) |
 | **2. Multi-Tool Intent Router** | Multi-tool schema evaluation, zero-shot tool selection based on query context. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DuhranDuhran/AI-tool-calling/blob/main/Multi_Tool_Intent_Router.ipynb) |
-| **3. Parameter Guardrails & Error Handling** | Regex email validation, datetime parsing, numerical bound checks, client API error handling. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DuhranDuhran/AI-tool-calling/blob/main/Parameter_Guardrails_and_Error_Handling.ipynb) |
+| **3. Parameter Guardrails & Error Handling** | Regex email validation, datetime parsing, numerical bound checks, client API error handling. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DuhranDuhran/AI-tool-calling/blob/main/Guardrails_and_Error_Handling.ipynb) |
 
 ## 🚀 Key Architectural Patterns
 
