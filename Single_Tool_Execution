@@ -1,0 +1,96 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNak3GW0K118V6CTF6ESC4a",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DuhranDuhran/AI-tool-calling/blob/main/Single_Tool_Execution\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Single-Tool Function Caller"
+      ],
+      "metadata": {
+        "id": "DzKRc4ldNKDq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "83nraY3vLppb",
+        "outputId": "1a26cb3e-07c3-44ae-f886-43823371074a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "--- RUNNING MINI-PROJECT 1A ---\n",
+            "\n",
+            "⚡ [EXECUTING TOOL]: Item Price = $120.00, Fee = $15.00\n",
+            "AI Final Response:\n",
+            "The net refund total after deducting the $15 return shipping fee is **$105.00**.\n"
+          ]
+        }
+      ],
+      "source": [
+        "from google import genai\n",
+        "from google.genai import types\n",
+        "from google.colab import userdata\n",
+        "\n",
+        "# 1. Initialize Client (Uses 1 API call total)\n",
+        "api_key = userdata.get('Gemini_API_Key1')\n",
+        "client = genai.Client(api_key=api_key)\n",
+        "\n",
+        "# 2. Define a single, focused tool\n",
+        "def calculate_refund_amount(item_price: float, return_fee: float) -> str:\n",
+        "    \"\"\"Calculates the net refund after deducting return shipping fees.\n",
+        "\n",
+        "    Args:\n",
+        "        item_price: Original purchase price of the item.\n",
+        "        return_fee: Deduction fee for shipping or restocking.\n",
+        "    \"\"\"\n",
+        "    net_refund = item_price - return_fee\n",
+        "    print(f\"\\n⚡ [EXECUTING TOOL]: Item Price = ${item_price:.2f}, Fee = ${return_fee:.2f}\")\n",
+        "    return f\"Net refund amount: ${net_refund:.2f}\"\n",
+        "\n",
+        "# 3. Single Prompt Test\n",
+        "prompt = \"A customer returned a $120 coat. Deduct the $15 return shipping fee and give me the refund total.\"\n",
+        "\n",
+        "print(\"--- RUNNING MINI-PROJECT 1A ---\")\n",
+        "response = client.models.generate_content(\n",
+        "    model=\"gemini-3.5-flash-lite\",  # Lite model has high rate limit tolerances\n",
+        "    contents=prompt,\n",
+        "    config=types.GenerateContentConfig(tools=[calculate_refund_amount])\n",
+        ")\n",
+        "\n",
+        "print(f\"AI Final Response:\\n{response.text}\")"
+      ]
+    }
+  ]
+}
